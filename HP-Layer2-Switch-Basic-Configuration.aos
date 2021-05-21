@@ -1,0 +1,59 @@
+!--------------------------------------------------------------------------
+! HP Layer 2 Switch Basic Configuration
+!--------------------------------------------------------------------------
+!
+hostname [[HOSTNAME]]
+!
+console idle-timeout 600
+!
+fault-finder bad-driver sensitivity high
+fault-finder bad-transceiver sensitivity high
+fault-finder bad-cable sensitivity high
+fault-finder too-long-cable sensitivity high
+fault-finder over-bandwidth sensitivity high
+fault-finder broadcast-storm sensitivity high
+fault-finder loss-of-link sensitivity high
+fault-finder duplex-mismatch-hdx sensitivity high
+fault-finder duplex-mismatch-fdx sensitivity high
+fault-finder link-flap sensitivity high
+!
+console inactivity-timer 10
+!
+no telnet-server
+no web-management
+!
+timesync sntp
+sntp unicast
+sntp server [[NTP Server 1]]
+sntp server [[NTP Server 2]]
+time daylight-time-rule western-Europe
+!
+ip default-gateway [[IP DEFAULT GATEWAY]]
+!
+interface range [[INTERFACE PORT RANGE]]
+mdix-mode mdix
+exit
+!
+snmp-server community "[[SNMP STRING]]" unrestricted
+!
+max-vlans 48
+!
+vlan [[VLAN]]
+name [[VLAN NAME]]
+ip address [[IP ADDRESS]] [[SUBNET MASK]]
+exit
+!
+spanning-tree
+spanning-tree range [[SPANNING-TREE PORT RANGE]] root-guard bpdu-protection pvst-protection
+spanning-tree config-name "[[SPANNING-TREE NAME]]"
+spanning-tree config-revision 1
+!
+no tftp server
+no autorun
+no dhcp config-file-update
+no dhcp image-file-update
+no lacp
+!
+password manager
+password manager user-name [[USERNAME]] plaintext [[MANAGER PASSWORD]]
+!

@@ -1,5 +1,5 @@
 !--------------------------------------------------------------------------
-! HP Layer 2 Switch Basic Configuration
+! Aruba/HP Layer 2 Switch Basic Configuration
 !--------------------------------------------------------------------------
 !
 hostname [[HOSTNAME]]
@@ -38,10 +38,23 @@ snmp-server community "[[SNMP STRING]]" unrestricted
 !
 max-vlans 48
 !
+!- management interface
 vlan [[VLAN]]
 name [[VLAN NAME]]
 ip address [[IP ADDRESS]] [[SUBNET MASK]]
 exit
+!
+!- Layer 2 VLAN
+vlan [[VLAN]]
+name [[VLAN NAME]]
+untagged [[UNTAGGED-VLAN-INTERFACES]]
+tagged [[TAGGED-VLAN-INTERFACES]]
+exit
+!
+!- interface Configuration
+interface [[INTERFACE]] name "[[DESCRIPTION]]"
+interface [[INTERFACE]] untagged vlan [[VLAN]]
+interface [[INTERFACE]] tagged vlan [[VLAN]]
 !
 spanning-tree
 spanning-tree range [[SPANNING-TREE PORT RANGE]] root-guard bpdu-protection pvst-protection
